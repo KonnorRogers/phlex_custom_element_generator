@@ -22,7 +22,7 @@ module PhlexCustomElementGenerator
     # end
 
     desc "generate_components [manifest_path] [options]", "Generates new Phlex components from a given `custom-elements.json`"
-    def generate_components(manifest_path = "", directory = "", namespaces = ["Shoelace"])
+    def generate_components(manifest_path = "", directory = ".", namespaces = ["Shoelace"])
       if manifest_path.to_s.chomp.strip == ""
         manifest_path = Prompts::TextPrompt.ask(
           label: "What is the file path of your custom elements manifest?",
@@ -34,7 +34,7 @@ module PhlexCustomElementGenerator
       ManifestReader.new(manifest: manifest_path).list_tag_names.each do |tag_name|
         class_name = tag_name.split(/-/).map(&:capitalize)
         component = ComponentGenerator.new(class_name: class_name, tag_name: tag_name, namespaces: namespaces)
-        file_path = path.join(directory, tag_name.gsub(/-/, "_"))
+        file_path = File.join(directory, tag_name.gsub(/-/, "_") + ".rb")
         puts "Writing to: #{tag_name} to #{file_path}"
         File.write(file_path, component.create)
       end
