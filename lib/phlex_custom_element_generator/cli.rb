@@ -34,8 +34,9 @@ module PhlexCustomElementGenerator
       ManifestReader.new(manifest: manifest_path).list_tag_names.each do |tag_name|
         class_name = tag_name.split(/-/).map(&:capitalize)
         component = ComponentGenerator.new(class_name: class_name, tag_name: tag_name, namespaces: namespaces)
-        puts "Writing to: #{tag_name} to #{directory}"
-        File.write(directory, component.create)
+        file_path = path.join(directory, tag_name.gsub(/-/, "_"))
+        puts "Writing to: #{tag_name} to #{file_path}"
+        File.write(file_path, component.create)
       end
     end
 
