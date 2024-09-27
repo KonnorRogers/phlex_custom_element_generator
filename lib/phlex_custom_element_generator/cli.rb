@@ -32,7 +32,7 @@ module PhlexCustomElementGenerator
       end
 
       ManifestReader.new(manifest: manifest_path).list_tag_names.each do |tag_name|
-        class_name = tag_name.split(/-/).map(&:capitalize)
+        class_name = tag_name.split(/-/).map(&:capitalize).join("")
         component = ComponentGenerator.new(class_name: class_name, tag_name: tag_name, namespaces: namespaces)
         file_path = File.join(directory, tag_name.gsub(/-/, "_") + ".rb")
         puts "Writing to: #{tag_name} to #{file_path}"
