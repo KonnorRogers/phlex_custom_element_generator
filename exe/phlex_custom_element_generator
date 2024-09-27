@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require "phlex_custom_element_generator"
+require_relative "../lib/phlex_custom_element_generator"
 
-CLI.start
+PhlexCustomElementGenerator::CLI.start
