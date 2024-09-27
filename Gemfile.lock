@@ -1,0 +1,40 @@
+PATH
+  remote: .
+  specs:
+    phlex_custom_element_generator (0.1.0)
+      prompts (~> 0.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.2)
+    fmt (0.3.1)
+      ast
+    io-console (0.7.2)
+    minitest (5.25.1)
+    prompts (0.2.1)
+      fmt
+      rainbow
+      reline
+      unicode-display_width
+      unicode-emoji
+    rainbow (3.1.1)
+    rake (13.2.1)
+    reline (0.5.10)
+      io-console (~> 0.5)
+    unicode-display_width (2.6.0)
+    unicode-emoji (3.5.0)
+      unicode-version (~> 1.0)
+    unicode-version (1.4.0)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  minitest (~> 5.16)
+  phlex_custom_element_generator!
+  rake (~> 13.0)
+
+BUNDLED WITH
+   2.5.11
