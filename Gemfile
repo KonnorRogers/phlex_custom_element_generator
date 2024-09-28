@@ -8,4 +8,4 @@ gemspec
 gem "rake", "~> 13.0"
 
 gem "minitest", "~> 5.16"
-gem "prompts", path: "../prompts"
+gem "prompts", github: "KonnorRogers/prompts", branch: "konnorrogers/fix-fmt-calls"

@@ -1,5 +1,7 @@
-PATH
-  remote: ../prompts
+GIT
+  remote: https://github.com/KonnorRogers/prompts.git
+  revision: 73f0fe63721afb06aef598301060f8889431aa53
+  branch: konnorrogers/fix-fmt-calls
   specs:
     prompts (0.2.1)
       fmt
@@ -18,7 +20,9 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    fmt (0.1.0)
+    ast (2.4.2)
+    fmt (0.3.1)
+      ast
     io-console (0.7.2)
     minitest (5.25.1)
     rainbow (3.1.1)
