@@ -11,8 +11,12 @@ module PhlexCustomElementGenerator
 class #{@class_name} < Phlex::HTML
   register_element :#{@tag_name}
 
-  def view_template
-    #{@tag_name}
+  def initialize(**attributes)
+    @attributes = attributes
+  end
+
+  def view_template(&)
+    #{@tag_name}(**@attributes, &)
   end
 end
 RUBY
