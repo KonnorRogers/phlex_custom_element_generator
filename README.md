@@ -27,14 +27,14 @@ and then run `bundle install`
 ### `print_phlex_registrations`
 
 ```bash
-phlex_custom_element_generator print_phlex_registrations [manifest_path]
+bundle exec phlex_custom_element_generator print_phlex_registrations [manifest_path]
 # Prints a list of all elements from a manifest with kebab-case turned into snake case IE: `sl-alert` -> `sl_alert`
 ```
 
 ### `print_tag_names`
 
 ```bash
-phlex_custom_element_generator print_tag_names [manifest_path]
+bundle exec phlex_custom_element_generator print_tag_names [manifest_path]
 # Prints a list of all elements from a manifest with original casing
 ```
 
@@ -43,7 +43,7 @@ phlex_custom_element_generator print_tag_names [manifest_path]
 Generates Phlex components from a given manifest and based upon the manifest path and directory. Currently manifest paths must live locally in your file system.
 
 ```bash
-phlex_custom_element_generator generate_components [manifest_path] [--directory=""] [--namespaces=""]
+bundle exec phlex_custom_element_generator generate_components [manifest_path] [--directory=""] [--namespaces=""]
 ```
 
 ```
