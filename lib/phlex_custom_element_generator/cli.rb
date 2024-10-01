@@ -1,4 +1,5 @@
 require "json"
+require 'fileutils'
 require "rainbow" # <- optional, for color support
 require "fmt"
 require "prompts"
@@ -22,14 +23,41 @@ module PhlexCustomElementGenerator
     # end
 
     desc "generate_components [manifest_path] [options]", "Generates new Phlex components from a given `custom-elements.json`"
-    def generate_components(manifest_path = "", directory = ".", namespaces = ["Shoelace"])
+    method_option :directory, type: :string, aliases: "d", default: "", banner: "The directory to place your components based on the current working directory."
+    method_option :namespaces, type: :string, aliases: "n", default: "", banner: "The module namespaces to place your component in IE: module Shoelace. This option is case-sensitive."
+    def generate_components(manifest_path = "")
       if manifest_path.to_s.chomp.strip == ""
         manifest_path = Prompts::TextPrompt.ask(
           label: "What is the file path of your custom elements manifest?",
-          hint: "IE: node_modules/@shoelace-style/shoelace/dist/custom-elements.json",
+          hint: "IE: ./node_modules/@shoelace-style/shoelace/dist/custom-elements.json",
           required: true
         )
       end
+
+      directory = options[:directory]
+      if directory.to_s.chomp.strip == ""
+        directory = Prompts::TextPrompt.ask(
+          label: "What directory should we place your components in?",
+          hint: "IE: ./shoelace. Hit [Enter] to place them in the current directory.",
+        )
+      end
+
+      directory = directory.to_s.chomp.strip
+      if directory == ""
+        directory = "."
+      end
+      FileUtils.mkdir_p(directory)
+
+
+      namespaces = options[:namespaces]
+      if namespaces.to_s.chomp.strip == ""
+        namespaces = Prompts::TextPrompt.ask(
+          label: "What namespaces should we place your components in? List should be comma separated.",
+          hint: "IE: Views,Shoelace . Hit [Enter] to place them with no namespace.",
+        )
+      end
+
+      namespaces = namespaces.split(/\s*,\s*/).reject { |str| str.to_s.chomp == "" }
 
       ManifestReader.new(manifest: manifest_path).list_tag_names.each do |tag_name|
         class_name = tag_name.split(/-/).map(&:capitalize).join("")
