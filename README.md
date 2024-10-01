@@ -1,24 +1,77 @@
 # PhlexCustomElementGenerator
 
-TODO: Delete this and the text below, and describe your gem
+A way to read a custom elements manifest and generate Phlex components.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/phlex_custom_element_generator`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Prerequisites
+
+- Phlex 2.0 - This gem does not support Phlex 1.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+TODO: Make a proper release once this issue is fixed in Prompts:
 
-Install the gem and add to the application's Gemfile by executing:
+<https://github.com/fractaledmind/prompts/pull/9>
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Add the following to your Gemfile:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+```rb
+# Gemfile
+gem "phlex_custom_element_generator", github: "KonnorRogers/phlex_custom_element_generator"
+gem "prompts", github: "KonnorRogers/prompts", branch: "konnorrogers/fix-fmt-calls"
+```
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+and then run `bundle install`
 
-## Usage
+## Commands
 
-TODO: Write usage instructions here
+### `print_phlex_registrations`
+
+```bash
+phlex_custom_element_generator print_phlex_registrations [manifest_path]
+# Prints a list of all elements from a manifest with kebab-case turned into snake case IE: `sl-alert` -> `sl_alert`
+```
+
+### `print_tag_names`
+
+```bash
+phlex_custom_element_generator print_tag_names [manifest_path]
+# Prints a list of all elements from a manifest with original casing
+```
+
+### `generate_components`
+
+Generates Phlex components from a given manifest and based upon the manifest path and directory. Currently manifest paths must live locally in your file system.
+
+```bash
+phlex_custom_element_generator generate_components [manifest_path] [--directory=""] [--namespaces=""]
+```
+
+```
+`--directory` is the directory to generate to components to IE: `./shoelace`
+`--namespaces` is a comma separate module namespace.
+```
+
+Using `--namespaces="Views,Shoelace"` will generate the following:
+
+```rb
+module Views
+  module Shoelace
+    class SlAlert
+      register_element :sl_alert
+
+      def view_template
+        sl_alert
+      end
+    end
+  end
+end
+```
+
+## Roadmap
+
+- [ ] - Support manifests over HTTP
+- [ ] - Convenience helper for NPM packages to auto search node_modules
+- [ ] - Allow template extensions
 
 ## Development
 
@@ -37,3 +90,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the PhlexCustomElementGenerator project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/phlex_custom_element_generator/blob/main/CODE_OF_CONDUCT.md).
+

@@ -68,7 +68,7 @@ module PhlexCustomElementGenerator
       end
     end
 
-    desc "print_tag_names [manifest_path] [options]", "Prints a list of all elements from a manifest with original casing"
+    desc "print_tag_names [manifest_path]", "Prints a list of all elements from a manifest with original casing"
     def print_tag_names(manifest_path = "")
       if manifest_path.to_s.chomp.strip == ""
         manifest_path = Prompts::TextPrompt.ask(
@@ -81,7 +81,7 @@ module PhlexCustomElementGenerator
       puts ManifestReader.new(manifest: manifest_path).list_tag_names
     end
 
-    desc "print_phlex_registrations [manifest_path] [options]", "Prints a list of all elements from a manifest with kebab-case turned into snake_case"
+    desc "print_phlex_registrations [manifest_path]", "Prints a list of all elements from a manifest with kebab-case turned into snake_case"
     def print_phlex_registrations(manifest_path = "")
       if manifest_path.to_s.chomp.strip == ""
         manifest_path = Prompts::TextPrompt.ask(
