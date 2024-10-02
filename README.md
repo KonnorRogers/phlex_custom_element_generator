@@ -57,10 +57,12 @@ Using `--namespaces="Views,Shoelace"` will generate the following:
 module Views
   module Shoelace
     class SlAlert
-      register_element :sl_alert
+      def initialize(**attributes)
+        @attributes = attributes
+      end
 
-      def view_template
-        sl_alert
+      def view_template(&)
+        sl_alert(**@attributes, &)
       end
     end
   end
