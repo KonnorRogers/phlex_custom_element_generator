@@ -13,9 +13,11 @@ class #{@class_name} < Phlex::HTML
   register_element :#{@tag_name}
 
   def initialize(
-    #{@attributes.length > 0 ? @attributes.join(":,\n    ") + ",\n    **attributes" : "**attributes"}
+    #{attributes_to_kwargs}
   )
-    @attributes = attributes
+    @attributes = attributes.with_defaults({
+      #{attribute_hash}
+    })
   end
 
   def view_template(&)
@@ -23,6 +25,19 @@ class #{@class_name} < Phlex::HTML
   end
 end
 RUBY
+    end
+
+
+    def attributes_to_kwargs
+      @attributes.length > 0 ?
+        @attributes.map { |attr| "#{attr[:attr_name]}: #{attr[:default_value] || "nil"}" }.join(",\n    ") + ",\n    **attributes"
+        : "**attributes"
+    end
+
+    def attribute_hash
+      @attributes.length > 0 ?
+        @attributes.map { |attr| "#{attr[:attr_name]}: #{attr[:attr_name]}" }.join(",\n      ")
+        : ""
     end
 
     def create

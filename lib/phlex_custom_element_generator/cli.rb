@@ -65,10 +65,9 @@ module PhlexCustomElementGenerator
 
         # Symbolized attribute names
         attributes = mod["members"]
-          .map { |member| member["attribute"] }
-          .reject { |attr| attr.to_s == "" }
-          .map { |attr| attr.gsub(/-/, "_").to_sym }
-          .sort
+          .reject { |member| member["attribute"].to_s == "" }
+          .map { |member| { attr_name: member["attribute"].gsub(/-/, "_").to_sym, default_value: member["default"] } }
+          .sort_by { |member| member[:attr_name] }
 
         component = ComponentGenerator.new(
           class_name: class_name,
