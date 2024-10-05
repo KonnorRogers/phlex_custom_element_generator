@@ -74,6 +74,7 @@ end
 - [ ] - Support manifests over HTTP
 - [ ] - Convenience helper for NPM packages to auto search node_modules
 - [ ] - Allow template extensions
+- [ ] - Add in attributes and default attributes to kwargs for better LSP support.
 
 ## Development
 
