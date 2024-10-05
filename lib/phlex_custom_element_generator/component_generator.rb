@@ -1,17 +1,20 @@
 module PhlexCustomElementGenerator
   class ComponentGenerator
-    attr_accessor :class_name, :tag_name, :namespaces, :component_code
+    attr_accessor :class_name, :tag_name, :namespaces, :component_code, :attributes
 
-    def initialize(class_name:, tag_name:, namespaces: [])
+    def initialize(class_name:, tag_name:, namespaces: [], attributes: [])
       @class_name = class_name
       @tag_name = tag_name.gsub(/-/, "_")
       @namespaces = namespaces
+      @attributes = attributes
 
       @component_code = <<~RUBY
 class #{@class_name} < Phlex::HTML
   register_element :#{@tag_name}
 
-  def initialize(**attributes)
+  def initialize(
+    #{@attributes.length > 0 ? @attributes.join(":,\n    ") + ",\n    **attributes" : "**attributes"}
+  )
     @attributes = attributes
   end
 

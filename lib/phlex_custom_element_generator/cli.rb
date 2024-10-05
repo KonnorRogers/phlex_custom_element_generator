@@ -59,9 +59,23 @@ module PhlexCustomElementGenerator
 
       namespaces = namespaces.split(/\s*,\s*/).reject { |str| str.to_s.chomp == "" }
 
-      ManifestReader.new(manifest: manifest_path).list_tag_names.each do |tag_name|
+      manifest = ManifestReader.new(manifest: manifest_path)
+      manifest.find_all_custom_elements.each do |tag_name, mod|
         class_name = tag_name.split(/-/).map(&:capitalize).join("")
-        component = ComponentGenerator.new(class_name: class_name, tag_name: tag_name, namespaces: namespaces)
+
+        # Symbolized attribute names
+        attributes = mod["members"]
+          .map { |member| member["attribute"] }
+          .reject { |attr| attr.to_s == "" }
+          .map { |attr| attr.gsub(/-/, "_").to_sym }
+          .sort
+
+        component = ComponentGenerator.new(
+          class_name: class_name,
+          tag_name: tag_name,
+          namespaces: namespaces,
+          attributes: attributes
+        )
         file_path = File.join(directory, tag_name.gsub(/-/, "_") + ".rb")
         puts "Writing to: #{tag_name} to #{file_path}"
         File.write(file_path, component.create)

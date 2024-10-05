@@ -34,8 +34,8 @@ module PhlexCustomElementGenerator
 
           tag_name = dec["tagName"]
 
-          custom_elements[tag_name] = dec if tag_name
           dec["parent_module"] = parent_module
+          custom_elements[tag_name] = dec if tag_name
         end
       end
 
