@@ -3,7 +3,9 @@ module Foo
     class MyElement < Phlex::HTML
       register_element :my_element
 
-      def initialize(**attributes)
+      def initialize(
+        **attributes
+      )
         @attributes = attributes
       end
 
