@@ -30,7 +30,7 @@ RUBY
 
     def attributes_to_kwargs
       @attributes.length > 0 ?
-        @attributes.map { |attr| "#{attr[:attr_name]}: #{attr[:default_value] || "nil"}" }.join(",\n    ") + ",\n    **attributes"
+        @attributes.map { |attr| "#{attr[:attr_name]}: #{(%w[undefined null].include?(attr[:default_value]) ? "nil" : attr[:default_value]) || "nil"}" }.join(",\n    ") + ",\n    **attributes"
         : "**attributes"
     end
 
