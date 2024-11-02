@@ -15,8 +15,7 @@ class #{@class_name} < Phlex::HTML
   def initialize(
     #{attributes_to_kwargs}
   )
-    @attributes = attributes.with_defaults({
-      #{attribute_hash}
+    @attributes = attributes.with_defaults({#{attribute_hash.to_s.empty? ? "" : "\n    " + attribute_hash}
     })
   end
 

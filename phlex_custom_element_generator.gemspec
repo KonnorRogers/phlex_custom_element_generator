@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "prompts", "~> 0.2"
+  spec.add_dependency "prompts", "~> 0.3"
 
   # Locked until this is fixed: https://github.com/fractaledmind/prompts/issues/8
   spec.add_dependency "thor"

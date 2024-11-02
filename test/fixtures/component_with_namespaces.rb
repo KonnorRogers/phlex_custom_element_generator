@@ -6,7 +6,8 @@ module Foo
       def initialize(
         **attributes
       )
-        @attributes = attributes
+        @attributes = attributes.with_defaults({
+        })
       end
 
       def view_template(&)
