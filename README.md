@@ -6,21 +6,16 @@ A way to read a custom elements manifest and generate Phlex components.
 
 - Phlex 2.0 - This gem does not support Phlex 1.
 
-## Installation
+## Usage
 
-TODO: Make a proper release once this issue is fixed in Prompts:
+`gem exec phlex_custom_element_generator`
 
-<https://github.com/fractaledmind/prompts/pull/9>
-
-Add the following to your Gemfile:
+or
 
 ```rb
-# Gemfile
-gem "phlex_custom_element_generator", github: "KonnorRogers/phlex_custom_element_generator"
-gem "prompts", github: "KonnorRogers/prompts", branch: "konnorrogers/fix-fmt-calls"
+bundle add phlex_custom_element_generator
+bundle exec phlex_custom_element_generator
 ```
-
-and then run `bundle install`
 
 ## Commands
 
@@ -74,7 +69,7 @@ end
 - [ ] - Support manifests over HTTP
 - [ ] - Convenience helper for NPM packages to auto search node_modules
 - [ ] - Allow template extensions
-- [ ] - Add in attributes and default attributes to kwargs for better LSP support.
+- [x] - Add in attributes and default attributes to kwargs for better LSP support.
 
 ## Development
 
